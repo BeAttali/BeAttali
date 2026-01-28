@@ -2,12 +2,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // EmailJS init (API)
-    // Public key (OK à exposer côté client) : dMT53k7xhk-0kY9jh
-    // Service ID : service_mkhlavg
-    // Template ID : template_xui1fwi
-    const EMAILJS_PUBLIC_KEY = 'dMT53k7xhk-0kY9jh';
-    const EMAILJS_SERVICE_ID = 'service_mkhlavg';
-    const EMAILJS_TEMPLATE_ID = 'template_xui1fwi';
+    // Public key (OK à exposer côté client) : cdG1WE1NnNlnHsDJu
+    // Service ID : service_gxwmu4d
+    // Template ID : template_tjgsto6
+    const EMAILJS_PUBLIC_KEY = 'cdG1WE1NnNlnHsDJu';
+    const EMAILJS_SERVICE_ID = 'service_gxwmu4d';
+    const EMAILJS_TEMPLATE_ID = 'template_tjgsto6';
 
     if (window.emailjs && typeof window.emailjs.init === 'function') {
         window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
@@ -224,11 +224,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('EmailJS non initialisé.');
                 }
 
-                // IMPORTANT: les clés ci-dessous doivent correspondre aux variables de ton template EmailJS.
-                // Les plus courantes sont: from_name, reply_to, message
                 await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                    from_name: name,
-                    reply_to: email,
+                    name: name,
+                    email: email,
                     message: message,
                 });
 
