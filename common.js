@@ -1,6 +1,20 @@
 // Attendre que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', function() {
     
+    // EmailJS init (API)
+    // Public key (OK à exposer côté client) : dMT53k7xhk-0kY9jh
+    // Service ID : service_mkhlavg
+    // Template ID : template_xui1fwi
+    const EMAILJS_PUBLIC_KEY = 'dMT53k7xhk-0kY9jh';
+    const EMAILJS_SERVICE_ID = 'service_mkhlavg';
+    const EMAILJS_TEMPLATE_ID = 'template_xui1fwi';
+
+    if (window.emailjs && typeof window.emailjs.init === 'function') {
+        window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    } else {
+        console.error('EmailJS SDK introuvable (script non chargé).');
+    }
+
     // Navigation mobile
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -191,21 +205,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
-            // Simulation d'envoi (à remplacer par votre logique backend)
-            console.log('Formulaire soumis:', { name, email, message });
-            
-            // Message de confirmation
-            alert('Merci pour votre message ! Je vous répondrai dès que possible.');
-            
-            // Réinitialiser le formulaire
-            contactForm.reset();
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const previousBtnText = submitBtn ? submitBtn.textContent : null;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Envoi...';
+            }
+
+            try {
+                if (!window.emailjs || typeof window.emailjs.send !== 'function') {
+                    throw new Error('EmailJS non initialisé.');
+                }
+
+                // IMPORTANT: les clés ci-dessous doivent correspondre aux variables de ton template EmailJS.
+                // Les plus courantes sont: from_name, reply_to, message
+                await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                    from_name: name,
+                    reply_to: email,
+                    message: message,
+                });
+
+                alert('Merci pour votre message ! Je vous répondrai dès que possible.');
+                contactForm.reset();
+            } catch (err) {
+                console.error('Erreur EmailJS:', err);
+                alert("Désolé, l'envoi a échoué. Réessaie dans quelques instants.");
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    if (previousBtnText != null) submitBtn.textContent = previousBtnText;
+                }
+            }
         });
     }
 
