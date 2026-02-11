@@ -1,7 +1,7 @@
 # 👋 Bonjour, moi c’est Betsalel Attali
 
 🎓 Étudiant en **BTS SIO**  
-💻 Développeur orienté **Web & Systèmes**  
+💻 Développeur **Full Stack**  
 🐧 À l’aise avec Linux, le terminal et les bases de données
 
 ---
