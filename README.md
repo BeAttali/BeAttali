@@ -1,6 +1,6 @@
 # 👋 Bonjour, moi c’est Betsalel Attali
 
-🎓 Étudiant en **BTS SIO** option **SLAM**
+🎓 Étudiant en **BTS SIO** option **SLAM** 
 💻 Développeur **Full Stack**  
 🐧 À l’aise avec Linux, le terminal et les bases de données
 
