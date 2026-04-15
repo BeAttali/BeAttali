@@ -473,6 +473,10 @@ body {
     margin-bottom: 1rem;
 }
 
+.skill-item p {
+    text-align: center;
+}
+
 .skill-icon svg {
     width: 28px;
     height: 28px;
